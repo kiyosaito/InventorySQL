@@ -28,6 +28,8 @@ public class Customisation : MonoBehaviour
     public int selectedIndex, points = 10;
     public PlayerHandler player;
     public PlayerSaveAndLoad saveNew;
+
+    public PlayerDatabase database;
     void Start()
     {
         for (int i = 0; i < skinMax; i++)
