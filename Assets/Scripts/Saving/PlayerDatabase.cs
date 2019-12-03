@@ -25,10 +25,14 @@ public class PlayerDatabase : MonoBehaviour
     }
     void Start()
     {
-        example = (Example)enumIndex;
+        //example = (Example)enumIndex;
     }
     private void Update()
     {
         
+    }
+    public void SavingToDataBase()
+    {
+        StartCoroutine(PlayerStats(charName, skinIndex, hairIndex, mouthIndex, eyesIndex, clothesIndex, armourIndex, classEnumIndex));
     }
 }

@@ -30,6 +30,8 @@ public class Customisation : MonoBehaviour
     public PlayerSaveAndLoad saveNew;
 
     public PlayerDatabase database;
+    public int charIndex;
+
     void Start()
     {
         for (int i = 0; i < skinMax; i++)
@@ -69,6 +71,7 @@ public class Customisation : MonoBehaviour
         SetTexture("Clothes", 0);
         SetTexture("Armour", 0);
         ChooseClass(selectedIndex);
+        charClass = (CharacterClass)charIndex;
     }
     public void Save()
     {
@@ -82,15 +85,15 @@ public class Customisation : MonoBehaviour
         player.curStamina = player.maxStamina;
 
         //new Char Stats
-        player.skinIndex = skinIndex;
-        player.hairIndex = hairIndex;
-        player.mouthIndex = mouthIndex;
-        player.eyesIndex = eyesIndex;
-        player.clothesIndex = clothesIndex;
-        player.armourIndex = armourIndex;
+        database.skinIndex = skinIndex;
+        database.hairIndex = hairIndex;
+        database.mouthIndex = mouthIndex;
+        database.eyesIndex = eyesIndex;
+        database.clothesIndex = clothesIndex;
+        database.armourIndex = armourIndex;
 
-        player.characterClass = charClass;
-        player.characterName = characterName;
+        database.classEnumIndex = charIndex;
+        database.charName = characterName;
         for (int i = 0; i < playerStats.Length; i++)
         {
             player.stats[i].value = (playerStats[i].statValue + playerStats[i].tempStat);
