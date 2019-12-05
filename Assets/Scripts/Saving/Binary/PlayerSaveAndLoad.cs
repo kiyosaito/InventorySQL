@@ -3,6 +3,7 @@ public class PlayerSaveAndLoad : MonoBehaviour
 {
     public PlayerHandler player;
     public bool custom;
+    public static PlayerDatabaseData database;
     private void Start()
     {
       if(!custom)
@@ -17,9 +18,9 @@ public class PlayerSaveAndLoad : MonoBehaviour
     }
     public void Load()
     {
-        PlayerData data = PlayerBinary.LoadData(player);
-        player.name = data.playerName;
-        player.curCheckPoint = GameObject.Find(data.checkPoint).GetComponent<Transform>();
+        //PlayerData data = PlayerBinary.LoadData(player);
+        player.name = database.charName;
+       /* player.curCheckPoint = GameObject.Find(data.checkPoint).GetComponent<Transform>();
         player.maxHealth = data.maxHealth;
         player.maxMana = data.maxMana;
         player.maxStamina = data.maxStamina;
@@ -37,26 +38,29 @@ public class PlayerSaveAndLoad : MonoBehaviour
         {
             player.transform.position = player.curCheckPoint.position;
             player.transform.rotation = player.curCheckPoint.rotation;
-        }
-        player.skinIndex = data.skinIndex;
-        player.hairIndex = data.hairIndex;
-        player.mouthIndex = data.mouthIndex;
-        player.eyesIndex = data.eyesIndex;
-        player.clothesIndex = data.clothesIndex;
-        player.armourIndex = data.armourIndex;
+        }*/
+        player.skinIndex = database.skinIndex;
+        player.hairIndex = database.hairIndex;
+        player.mouthIndex = database.mouthIndex;
+        player.eyesIndex = database.eyesIndex;
+        player.clothesIndex = database.clothesIndex;
+        player.armourIndex = database.armourIndex;
 
-        player.characterClass = (CharacterClass)data.classIndex;
-        player.characterName = data.playerName;
+        player.characterClass = (CharacterClass)database.classEnumIndex;
+        player.characterName = database.charName;
 
-        for (int i = 0; i < player.stats.Length; i++)
-        {
-            player.stats[i].value = data.stats[i];
-        }
-        LoadCustomisation.SetTexture("Skin", data.skinIndex);
-        LoadCustomisation.SetTexture("Hair", data.hairIndex);
-        LoadCustomisation.SetTexture("Mouth", data.mouthIndex);
-        LoadCustomisation.SetTexture("Eyes", data.eyesIndex);
-        LoadCustomisation.SetTexture("Clothes", data.clothesIndex);
-        LoadCustomisation.SetTexture("Armour", data.armourIndex);
+     
+        player.stats[0].value = database.strengthStat;
+        player.stats[1].value = database.dexterityStat;
+        player.stats[2].value = database.constitutionStat;
+        player.stats[3].value = database.wisdomStat;
+        player.stats[4].value = database.intelligenceStat;
+        player.stats[5].value = database.charismaStat;
+        LoadCustomisation.SetTexture("Skin", database.skinIndex);
+        LoadCustomisation.SetTexture("Hair", database.hairIndex);
+        LoadCustomisation.SetTexture("Mouth", database.mouthIndex);
+        LoadCustomisation.SetTexture("Eyes", database.eyesIndex);
+        LoadCustomisation.SetTexture("Clothes", database.clothesIndex);
+        LoadCustomisation.SetTexture("Armour", database.armourIndex);
     }
 }

@@ -31,8 +31,10 @@ public class Customisation : MonoBehaviour
 
     public PlayerDatabase database;
     public int charIndex;
-
-
+    [SerializeField]
+    private GameObject characterExists;
+    [SerializeField]
+    private GameObject unusedPoints;
     void Start()
     {
         for (int i = 0; i < skinMax; i++)
@@ -74,6 +76,8 @@ public class Customisation : MonoBehaviour
         ChooseClass(selectedIndex);
         charClass = (CharacterClass)charIndex;
         database = GetComponent<PlayerDatabase>();
+        characterExists.SetActive(false);
+        unusedPoints.SetActive(false);
     }
     public void Save()
     {
@@ -100,9 +104,36 @@ public class Customisation : MonoBehaviour
         {
             player.stats[i].value = (playerStats[i].statValue + playerStats[i].tempStat);
         }
+        database.strengthStat = player.stats[0].value;
+        database.dexterityStat = player.stats[1].value;
+        database.constitutionStat = player.stats[2].value;
+        database.wisdomStat = player.stats[3].value;
+        database.intelligenceStat = player.stats[4].value;
+        database.charismaStat = player.stats[5].value;
+        database.slotIndex = PlayerData.saveSlot;
         //saveNew.Save();
-        database.SavingToDataBase();
+        database.SavingToDataBase(ProcessWebRequestResult);
         //SceneManager.LoadScene(2);
+    }
+    public void ProcessWebRequestResult(string result)
+    {
+        Debug.Log(result);
+        if (points != 0)
+        {
+            unusedPoints.SetActive(true);
+        }
+        else
+        {
+            if (result == "error insert failed")
+            {
+                characterExists.SetActive(true);
+
+            }
+            else
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
     }
     public void SetTexture(string type, int dir)
     {
@@ -192,7 +223,7 @@ public class Customisation : MonoBehaviour
         }
         DisplayCustom();
         DisplayStats();
-        if (GUI.Button(new Rect(14.25f*scr.x, 8.5f*scr.y, scr.x, 0.25f*scr.y), "Save"))
+        if (GUI.Button(new Rect(14.25f * scr.x, 8.5f * scr.y, scr.x, 0.25f * scr.y), "Save"))
         {
             Save();
         }
@@ -323,7 +354,7 @@ public class Customisation : MonoBehaviour
             }
             ChooseClass(selectedIndex);
         }
-        GUI.Box(new Rect(scr.x * 13.75f, scr.y + i * (0.5f * scr.y), scr.x*1.5f, scr.y * 0.5f), charClass.ToString());
+        GUI.Box(new Rect(scr.x * 13.75f, scr.y + i * (0.5f * scr.y), scr.x * 1.5f, scr.y * 0.5f), charClass.ToString());
         if (GUI.Button(new Rect(scr.x * 15.25f, scr.y + i * (0.5f * scr.y), scr.x * 0.5f, scr.y * 0.5f), ">"))
         {
             selectedIndex++;
@@ -337,21 +368,21 @@ public class Customisation : MonoBehaviour
         #endregion
         #region StatDistribution
         //in variables public int points = 10
-        GUI.Box(new Rect(scr.x * 13.25f, scr.y + i * (0.5f * scr.y), scr.x*2.5f, scr.y * 0.5f), "Points: "+points);
+        GUI.Box(new Rect(scr.x * 13.25f, scr.y + i * (0.5f * scr.y), scr.x * 2.5f, scr.y * 0.5f), "Points: " + points);
 
         for (int s = 0; s < playerStats.Length; s++)
         {
-            if(points > 0)
+            if (points > 0)
             {
-                if(GUI.Button(new Rect(scr.x * 15.25f, 2*scr.y + s * (0.5f * scr.y), scr.x * 0.5f, scr.y * 0.5f),"+"))
+                if (GUI.Button(new Rect(scr.x * 15.25f, 2 * scr.y + s * (0.5f * scr.y), scr.x * 0.5f, scr.y * 0.5f), "+"))
                 {
                     points--;
                     playerStats[s].tempStat++;
                 }
             }
-            GUI.Box(new Rect(scr.x * 13.75f, 2*scr.y + s * (0.5f * scr.y), 1.5f*scr.x, scr.y * 0.5f),playerStats[s].statName +": "+(playerStats[s].statValue+ playerStats[s].tempStat));
+            GUI.Box(new Rect(scr.x * 13.75f, 2 * scr.y + s * (0.5f * scr.y), 1.5f * scr.x, scr.y * 0.5f), playerStats[s].statName + ": " + (playerStats[s].statValue + playerStats[s].tempStat));
 
-            if(points < 10 && playerStats[s].tempStat > 0)
+            if (points < 10 && playerStats[s].tempStat > 0)
             {
                 if (GUI.Button(new Rect(scr.x * 13.25f, 2 * scr.y + s * (0.5f * scr.y), scr.x * 0.5f, scr.y * 0.5f), "-"))
                 {
