@@ -105,6 +105,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4506936746485291977}
   - component: {fileID: 4506936746495177747}
+  - component: {fileID: 8517940774813138357}
+  - component: {fileID: 2472938945888921529}
   m_Layer: 0
   m_Name: Prefab
   m_TagString: Untagged
@@ -147,6 +149,85 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8517940774813138357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4506936746485647273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a6508b47240b8c41961266b309f0fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinIndex: 0
+  hairIndex: 0
+  mouthIndex: 0
+  eyesIndex: 0
+  clothesIndex: 0
+  armourIndex: 0
+  classEnumIndex: 0
+  charName: 
+--- !u!114 &2472938945888921529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4506936746485647273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26ed13f145d5fc4dbfe3417a6d02adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 4506936746490858195}
+  skin: []
+  eyes: []
+  mouth: []
+  hair: []
+  clothes: []
+  armour: []
+  skinIndex: 0
+  eyesIndex: 0
+  mouthIndex: 0
+  hairIndex: 0
+  clothesIndex: 0
+  armourIndex: 0
+  skinMax: 4
+  eyesMax: 4
+  mouthMax: 3
+  hairMax: 5
+  clothesMax: 11
+  armourMax: 11
+  characterName: Adventurer
+  playerStats:
+  - statName: Strength
+    statValue: 0
+    tempStat: 0
+  - statName: Dexterity
+    statValue: 0
+    tempStat: 0
+  - statName: Constitution
+    statValue: 0
+    tempStat: 0
+  - statName: Wisdom
+    statValue: 0
+    tempStat: 0
+  - statName: Intelligence
+    statValue: 0
+    tempStat: 0
+  - statName: Charisma
+    statValue: 0
+    tempStat: 0
+  charClass: 0
+  scr: {x: 0, y: 0}
+  selectedIndex: 0
+  points: 10
+  player: {fileID: 0}
+  saveNew: {fileID: 0}
+  database: {fileID: 0}
+  charIndex: 0
 --- !u!1 &4506936746485647275
 GameObject:
   m_ObjectHideFlags: 0

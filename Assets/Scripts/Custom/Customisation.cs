@@ -32,6 +32,7 @@ public class Customisation : MonoBehaviour
     public PlayerDatabase database;
     public int charIndex;
 
+
     void Start()
     {
         for (int i = 0; i < skinMax; i++)
@@ -72,6 +73,7 @@ public class Customisation : MonoBehaviour
         SetTexture("Armour", 0);
         ChooseClass(selectedIndex);
         charClass = (CharacterClass)charIndex;
+        database = GetComponent<PlayerDatabase>();
     }
     public void Save()
     {
@@ -98,8 +100,9 @@ public class Customisation : MonoBehaviour
         {
             player.stats[i].value = (playerStats[i].statValue + playerStats[i].tempStat);
         }
-        saveNew.Save();
-        SceneManager.LoadScene(2);
+        //saveNew.Save();
+        database.SavingToDataBase();
+        //SceneManager.LoadScene(2);
     }
     public void SetTexture(string type, int dir)
     {
